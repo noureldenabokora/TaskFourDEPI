@@ -1,0 +1,57 @@
+﻿@model ListVM
+
+
+
+<form method="post" asp-action="Create" asp-controller="Instructor">
+
+    <div>
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" />
+        @*   @Html.TextBox("name",null ,new {@class= "from-control"})
+        @Html.TextBoxFor(a => a.departmentVM.FirstOrDefault().Name)
+        @Html.EditorFor(a => a.departmentVM[0].Name) *@
+
+    </div>
+    <div>
+        <label>imageURL</label>
+        <input type="file" name="imageURL" class="form-control" />
+    </div>
+    <div>
+        <label>Address</label>
+        <input type="text" name="address" class="form-control" />
+    </div>
+    <div>
+        <label>Department</label>
+
+        <select name="DepartmentID" class="form-control">
+            @foreach (var item in Model.departmentVM)
+            {
+                <option value="@item.ID"> @item.Name</option>
+
+            }
+
+        </select>
+    </div>
+    <div>
+        <label>Course</label>
+
+        <select name="CourseID" class="form-control">
+            @foreach (var item in Model.courseVM)
+            {
+                <option value="@item.ID"> @item.Name</option>
+
+            }
+
+        </select>
+    </div>
+
+    <input type="submit" value="save" class="btn btn-primary" />
+
+</form>
+
+<a href="/Instructor/GetAllInstructors" class="btn btn-primary">back to list</a>
+
+@*
+    @Html.ActionLink("BACK LIST", "GetAllInstructors", "Instructor", null, new {@class="btn btn-primary"})
+ *@
+

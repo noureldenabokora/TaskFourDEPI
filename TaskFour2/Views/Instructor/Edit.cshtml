@@ -1,0 +1,110 @@
+﻿@model DepartmentInstructorVM
+@{
+    SelectList selcetedDept = new SelectList(Model.DepartmentsVM, "ID", "Name");
+    SelectList selectedCourse = new SelectList(Model.CourseVM, "ID", "Name");
+}
+
+
+<form method="post" asp-action="Edit" asp-controller="Instructor" asp-route-id="@Model.ID">
+
+    @*     action="/Instructor/Edit/@Model.ID" *@
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div>
+        @* <label>Name</label>
+        <input type="text" name="name" value="@Model.Name" class="form-control" />
+        *@
+        <label asp-for="Name"></label>
+
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+    </div>
+    <div>
+        @* <label>imageURL</label>
+        <input type="file" name="imageURL" value="@Model.ImageURL" class="form-control" />
+        *@
+        <label asp-for="ImageURL"></label>
+
+        <input asp-for="ImageURL" type="file" class="form-control" />
+        <span asp-validation-for="ImageURL" class="text-danger"></span>
+
+    </div> 
+    <div>
+        @*   <label>Address</label>
+        <input type="text" name="address" value="@Model.Address" class="form-control" /> *@
+
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+
+
+    </div>
+    <div>
+        @*    <label>Department</label>
+        <select name="DepartmentID" class="form-control">
+        @foreach (DepartmentVM item in Model.DepartmentsVM)
+        {
+        @if (item.ID == @Model.DepartmentID)
+        {
+
+        <option value="@item.ID" selected> @item.Name</option>
+        }
+        else
+        {
+        <option value="@item.ID"> @item.Name</option>
+
+        }
+
+        }
+        </select>
+        *@
+        <label asp-for="DepartmentID">Department</label>
+
+        <select asp-for="DepartmentID" asp-items="selcetedDept" class="form-control">
+        </select>
+        <span asp-validation-for="DepartmentID" class="text-danger"></span>
+
+    </div>
+    <div>
+        @*    <label>Course</label>
+        <select name="CourseID" class="form-control">
+        @foreach (CourseVM item in Model.CourseVM)
+        {
+        @if (item.ID == @Model.CourseID)
+        {
+
+        <option value="@item.ID" selected> @item.Name</option>
+        }
+        else
+        {
+        <option value="@item.ID"> @item.Name</option>
+
+        }
+
+        }
+        </select> *@
+
+        <label asp-for="CourseID">Course</label>
+        <select asp-for="CourseID" asp-items="selectedCourse" class="form-control"> </select>
+        <span asp-validation-for="CourseID" class="text-danger"></span>
+
+
+    </div>
+
+    <input type="submit" value="save" class="btn btn-primary" />
+
+</form>
+
+<a asp-action="GetAllInstructors" asp-controller="Instructor" class="btn btn-primary">back to list</a>
+
+@* href="/Instructor/GetAllInstructors"  *@
+
+
+ @section validate 
+ {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

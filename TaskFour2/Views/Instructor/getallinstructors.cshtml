@@ -1,0 +1,33 @@
+﻿@model List<Instructor>
+
+
+<a href="/Instructor/create" class="btn btn-primary">create</a>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Image</th>
+        <th>Depatment</th>
+        <th>Course </th>
+        <th>Edit</th>
+        <th>Delete</th>
+
+    </tr>
+
+    @foreach (Instructor inst in Model)
+
+    {
+        <tr>
+            <td>@inst.Id</td>
+            <td>@inst.Name</td>
+            <td>@inst.Address</td>
+            <td><img src="~@inst.ImageURL" /></td>
+            <td>@inst.department.Name</td>
+            <td>@inst.course.Name</td>
+            <td> <a href="/Instructor/Edit/@inst.Id" class="btn btn-danger"></a>Edit</td>
+            <td> <a href="/Instructor/Delete/@inst.Id" class="btn btn-outline-dark"></a>Delete</td>
+
+        </tr>
+    }
+</table>
